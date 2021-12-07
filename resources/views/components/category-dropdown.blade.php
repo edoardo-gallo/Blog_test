@@ -9,6 +9,7 @@
 
     <x-dropdown-item href="/?{{ http_build_query(request()->except('category', 'page')) }}"
                      :active="request()->routeIs('home')">All
+                     {{-- get the current URI and check if match 'home' --}}
     </x-dropdown-item>
 
     @foreach ($categories as $category)

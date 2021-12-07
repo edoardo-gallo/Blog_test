@@ -1,5 +1,6 @@
 <?php
 
+// sort of like a View-Model, in this way I don't need to pass the category in routes
 namespace App\View\Components;
 
 use App\Models\Category;

@@ -9,6 +9,9 @@ class Comment extends Model
 {
     use HasFactory;
 
+    // to prevent lazy loading
+    protected $with = ['author'];
+
     public function post()
     {
         return $this->belongsTo(Post::class);

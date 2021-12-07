@@ -6,6 +6,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+
+
 <style>
     html {
         scroll-behavior: smooth;
@@ -33,13 +35,35 @@
 
             <div class="mt-8 md:mt-0 flex items-center">
                 @auth
-                    <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</span>
 
-                    <form method="POST" action="/logout" class="text-xs font-semibold text-blue-500 ml-6">
-                        @csrf
+                    <x-dropdown>
 
-                        <button type="submit">Log Out</button>
-                    </form>
+                        <x-slot name="trigger">
+
+                            <button class="text-xs font-bold uppercase">
+                                Welcome, {{ auth()->user()->name }}!
+                            </button>
+
+                        </x-slot>
+
+
+                        @admin
+                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
+                        
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+                        @endadmin
+                        
+                        {{-- when you click on it not go in 'href' instead prevent the default action and find the logout form and submit it --}}
+                        <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log out</x-dropdown-item>
+                    
+                        <form id="logout-form" method="POST" action="/logout" class="hidden">
+                            @csrf
+                        </form>
+
+                    </x-dropdown>
+                    
+
+                    
                 @else
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
                     <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>

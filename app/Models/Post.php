@@ -22,6 +22,7 @@ class Post extends Model
             )
         );
 
+        // give me the post that have a category where the category slug matches what the user requested from the browser
         $query->when($filters['category'] ?? false, fn($query, $category) =>
             $query->whereHas('category', fn ($query) =>
                 $query->where('slug', $category)

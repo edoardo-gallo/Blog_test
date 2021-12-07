@@ -24,6 +24,7 @@ class SessionsController extends Controller
             ]);
         }
 
+        // to protect from attack
         session()->regenerate();
 
         return redirect('/')->with('success', 'Welcome Back!');

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // (mutator) to modify the way you want attributes inserted by the user
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);

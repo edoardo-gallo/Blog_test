@@ -7,9 +7,10 @@ body {
 }
 
 p {
-    line-height: 1.6;
+    line-height: 1.6; 
 }
 
+/* all article but the first */
 article + article {
     margin-top: 3rem;
     padding-top: 3rem;
